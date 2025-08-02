@@ -16,6 +16,10 @@ import {
     Typography,
     MenuItem,
     IconButton,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -29,6 +33,8 @@ const rows = [
 
 export default function TableDemo() {
     const [open, setOpen] = useState(false);
+    const [close, setClose] = useState(false);
+
     const [form, setForm] = useState({name: "", age: "", role: "DEVELOPER"});
 
     const currencies = [
@@ -153,6 +159,7 @@ export default function TableDemo() {
                                     variant="outlined"
                                     size="small"
                                     startIcon={<DeleteIcon />}
+                                    onClick={() => setClose(!close)}
                                     sx={{color: "#f33322", borderColor: "#f33322"}}
                                 >
                                     Delete
@@ -165,6 +172,45 @@ export default function TableDemo() {
             <Drawer open={open} anchor="right" onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
+            <Dialog open={close} onClose={() => setClose(!close)}>
+                <DialogTitle>Simple Dialog</DialogTitle>
+                <DialogContent>
+                    <Typography>This is a Material UI dialog. You can place any content here.</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        variant="outlined"
+                        onClick={() => setClose(!close)}
+                        sx={{
+                            color: "#f33322",
+                            borderColor: "#f33322",
+                            paddingX: "50px",
+                            "&:hover": {
+                                backgroundColor: "#f0dada",
+                            },
+                        }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => setClose(!close)}
+                        sx={{
+                            color: "#fffff",
+                            backgroundColor: "#f33322",
+                            borderColor: "#f33322",
+                            paddingX: "50px",
+                            "&:hover": {
+                                borderColor: "#992a05",
+                                color: "#f5e6e6",
+                                backgroundColor: "#8c2503",
+                            },
+                        }}
+                    >
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </TableContainer>
     );
 }
